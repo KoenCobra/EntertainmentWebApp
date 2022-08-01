@@ -1,0 +1,16 @@
+﻿@import "_Config.scss";
+.main{
+    display: flex;
+}
+body{
+    background-color: green;
+    display: flex;
+    flex-direction:  column;
+}
+
+.navbar{
+    background-color: cornflowerblue;
+    width: 14rem;
+    height: 100vh;
+}
+

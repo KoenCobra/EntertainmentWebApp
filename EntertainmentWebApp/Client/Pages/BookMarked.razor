@@ -1,0 +1,41 @@
+﻿@page "/bookmarked"
+@inherits FluxorComponent
+@inject IState<BookMarkState> BookMarkedState
+@inject StateFacade Facade
+
+@if (BookMarkedState.Value.IsLoading)
+{
+    <span>Loading...</span>
+}
+
+else if (BookMarkedState.Value.HasCurrentErrors)
+{
+    <span>Whoops! Looks like an issue occurred loading BookMarks :(</span>
+}
+else if (!(BookMarkedState.Value.Medias is null) && BookMarkedState.Value.Medias.Any())
+{
+
+    @foreach (var media in BookMarkedState.Value.Medias.Where(x=>x.isBookmarked))
+    {
+        <p>@media.title</p>
+        <button @onclick="() => RemoveBookMarked(media)">remove</button>
+    }
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        if (BookMarkedState.Value.Medias is null)
+        {
+            Facade.LoadBookMarked();
+        }
+
+        base.OnInitialized();
+    }
+
+    private void RemoveBookMarked(Media media)
+    {
+        media.isBookmarked = false;
+    }
+
+}

@@ -1,0 +1,122 @@
+﻿@page "/"
+@inject IMediaService MediaService
+@inherits FluxorComponent
+@inject IState<BookMarkState> BookMarkedState
+@inject StateFacade Facade
+
+<NavLink href="bookmarked">bookmarked</NavLink>
+@*
+@if (BookMarkedState.Value.IsLoading)
+{
+}*@
+
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+    <p>Loading...</p>
+@*else if (BookMarkedState.Value.HasCurrentErrors)
+{
+    <p>Whoops! Looks like an issue occurred loading BookMarks :(</p>
+}
+else if (!(BookMarkedState.Value.Medias is null) && BookMarkedState.Value.Medias.Any())
+{
+    <p>Movies</p>
+    @foreach (var media in BookMarkedState.Value.Medias.Where(m=>m.category == "Movie"))
+    {
+        <p>@media.title</p>
+        <button @onclick="() => AddToBookMarked(media)">add</button>
+    }
+
+    <p>Series</p>
+    @foreach (var media in BookMarkedState.Value.Medias.Where(m=>m.category == "TV Series"))
+    {
+        <p>@media.title</p>
+        <button @onclick="() => AddToBookMarked(media)">add</button>
+    }
+}*@
+
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        if (BookMarkedState.Value.Medias is null)
+        {
+            Facade.LoadBookMarked();
+        }
+
+        base.OnInitialized();
+    }
+
+    private void AddToBookMarked(Media bookMedia)
+    {
+        bookMedia.isBookmarked = true;
+    }
+}
+
