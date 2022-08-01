@@ -4,12 +4,22 @@
 @inject StateFacade Facade
 
 <div class="search-component">
-    <img class="search-icon" src="Assets/icon-search.svg" alt=""/>
+    <img class="search-icon" src="Assets/icon-search.svg" alt="" />
     <input class="input-field" type="text" placeholder="Search for movies or TV series"
-           @bind="_searchWord" @bind:event="oninput"/>
+           @bind="_searchWord" @bind:event="oninput" />
 </div>
 
 <h2 class="trending">Trending</h2>
+
+@if(!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
+{
+@foreach (var media in MediaState.Value.Medias
+ .Where(m => m.isTrending && m.title.ToLower().Contains(_searchWord.ToLower())))
+{
+    <p>@media.title</p>
+    <button @onclick="() => AddToBookMarked(media)">add</button>
+}
+}
 
 @if (MediaState.Value.IsLoading)
 {
@@ -17,21 +27,15 @@
 
 else if (MediaState.Value.HasCurrentErrors)
 {
-    <p>Whoops! Looks like an issue occurred loading BookMarks :(</p>
+    <p>Whoops! Looks like an issue occurred loading media :(</p>
 }
 else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
 {
-    <p>Movies</p>
+    <h2>Recommended for you</h2>
     @foreach (var media in MediaState.Value.Medias
-        .Where(m => m.category == "Movie" && m.title.ToLower().Contains(_searchWord.ToLower())))
-    {
-        <p>@media.title</p>
-        <button @onclick="() => AddToBookMarked(media)">add</button>
-    }
-
-    <p>Series</p>
-    @foreach (var media in MediaState.Value.Medias.Where(m => m.category == "TV Series"
-                           && m.title.ToLower().Contains(_searchWord.ToLower())))
+     .Where(m => m.title.ToLower().Contains(_searchWord.ToLower())
+         && m.isTrending == false
+         ))
     {
         <p>@media.title</p>
         <button @onclick="() => AddToBookMarked(media)">add</button>
