@@ -1,6 +1,6 @@
 ﻿@page "/bookmarked"
 @inherits FluxorComponent
-@inject IState<BookMarkState> BookMarkedState
+@inject IState<MediaState> BookMarkedState
 @inject StateFacade Facade
 
 @if (BookMarkedState.Value.IsLoading)
@@ -27,7 +27,7 @@ else if (!(BookMarkedState.Value.Medias is null) && BookMarkedState.Value.Medias
     {
         if (BookMarkedState.Value.Medias is null)
         {
-            Facade.LoadBookMarked();
+            Facade.LoadMedia();
         }
 
         base.OnInitialized();

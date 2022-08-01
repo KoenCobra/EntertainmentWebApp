@@ -1,16 +1,16 @@
 ﻿@import "_Config.scss";
-.main{
+
+.main {
     display: flex;
-}
-body{
-    background-color: green;
-    display: flex;
-    flex-direction:  column;
 }
 
-.navbar{
-    background-color: cornflowerblue;
-    width: 14rem;
+.navbar {
+    width: 8rem;
     height: 100vh;
 }
 
+.content {
+    height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
+}

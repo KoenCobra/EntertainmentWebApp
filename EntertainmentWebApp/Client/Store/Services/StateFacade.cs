@@ -1,4 +1,4 @@
-﻿using EntertainmentWebApp.Client.Store.Features.BookMarked.Actions.LoadBookMarked;
+﻿using EntertainmentWebApp.Client.Store.Features.Media.Actions.LoadMedia;
 
 namespace EntertainmentWebApp.Client.Store.Services;
 
@@ -12,9 +12,9 @@ public class StateFacade
         (_logger, _dispatcher) = (logger, dispatcher);
     }
 
-    public void LoadBookMarked()
+    public void LoadMedia()
     {
         _logger.LogInformation("Issuing action to load bookmarked...");
-        _dispatcher.Dispatch(new LoadBookMarkedAction());
+        _dispatcher.Dispatch(new LoadMediaAction());
     }
 }

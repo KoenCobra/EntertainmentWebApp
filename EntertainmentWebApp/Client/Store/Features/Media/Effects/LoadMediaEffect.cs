@@ -1,10 +1,9 @@
 ﻿using System.Net.Http.Json;
-using EntertainmentWebApp.Client.Store.Features.BookMarked.Actions.LoadBookMarked;
-using EntertainmentWebApp.Shared;
+using EntertainmentWebApp.Client.Store.Features.Media.Actions.LoadMedia;
 
-namespace EntertainmentWebApp.Client.Store.Features.BookMarked.Effects;
+namespace EntertainmentWebApp.Client.Store.Features.Media.Effects;
 
-public class LoadBookMarkedEffect : Effect<LoadBookMarkedAction>
+public class LoadBookMarkedEffect : Effect<LoadMediaAction>
 {
     private readonly HttpClient _httpClient;
     private readonly ILogger<LoadBookMarkedEffect> _logger;
@@ -16,26 +15,27 @@ public class LoadBookMarkedEffect : Effect<LoadBookMarkedAction>
     }
 
 
-    public override async Task HandleAsync(LoadBookMarkedAction action, IDispatcher dispatcher)
+    public override async Task HandleAsync(LoadMediaAction action, IDispatcher dispatcher)
     {
         try
         {
             _logger.LogInformation("Loading Media...");
 
             await Task.Delay(TimeSpan.FromMilliseconds(1000));
-            var response = await _httpClient.GetFromJsonAsync<IEnumerable<Media>>("data.json");
+            var response =
+                await _httpClient.GetFromJsonAsync<IEnumerable<EntertainmentWebApp.Shared.Media>>("data.json");
 
             _logger.LogInformation("Media loaded successfully!");
 
             if (response != null)
             {
-                dispatcher.Dispatch(new LoadBookMarkedSuccessAction(response));
+                dispatcher.Dispatch(new LoadMediaSuccessAction(response));
             }
         }
         catch (Exception e)
         {
             _logger.LogError($"Error loading Media, reason: {e.Message}");
-            dispatcher.Dispatch(new LoadBookMarkedFailureAction(e.Message));
+            dispatcher.Dispatch(new LoadMediaFailureAction(e.Message));
         }
     }
 }

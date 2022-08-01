@@ -2,9 +2,9 @@
 
 namespace EntertainmentWebApp.Client.Store.State;
 
-public class BookMarkState : RootState
+public class MediaState : RootState
 {
-    public BookMarkState(bool isLoading, string? currentErrorMessage, IEnumerable<Media>? medias, Media? media) : base(
+    public MediaState(bool isLoading, string? currentErrorMessage, IEnumerable<Media>? medias, Media? media) : base(
         isLoading, currentErrorMessage)
     {
         Medias = medias;

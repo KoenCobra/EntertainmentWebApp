@@ -1,114 +1,53 @@
 ﻿@page "/"
-@inject IMediaService MediaService
 @inherits FluxorComponent
-@inject IState<BookMarkState> BookMarkedState
+@inject IState<MediaState> MediaState
 @inject StateFacade Facade
 
-<NavLink href="bookmarked">bookmarked</NavLink>
-@*
-@if (BookMarkedState.Value.IsLoading)
-{
-}*@
+<div class="search-component">
+    <img class="search-icon" src="Assets/icon-search.svg" alt=""/>
+    <input class="input-field" type="text" placeholder="Search for movies or TV series"
+           @bind="_searchWord" @bind:event="oninput"/>
+</div>
 
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-    <p>Loading...</p>
-@*else if (BookMarkedState.Value.HasCurrentErrors)
+<h2 class="trending">Trending</h2>
+
+@if (MediaState.Value.IsLoading)
+{
+}
+
+else if (MediaState.Value.HasCurrentErrors)
 {
     <p>Whoops! Looks like an issue occurred loading BookMarks :(</p>
 }
-else if (!(BookMarkedState.Value.Medias is null) && BookMarkedState.Value.Medias.Any())
+else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
 {
     <p>Movies</p>
-    @foreach (var media in BookMarkedState.Value.Medias.Where(m=>m.category == "Movie"))
+    @foreach (var media in MediaState.Value.Medias
+        .Where(m => m.category == "Movie" && m.title.ToLower().Contains(_searchWord.ToLower())))
     {
         <p>@media.title</p>
         <button @onclick="() => AddToBookMarked(media)">add</button>
     }
 
     <p>Series</p>
-    @foreach (var media in BookMarkedState.Value.Medias.Where(m=>m.category == "TV Series"))
+    @foreach (var media in MediaState.Value.Medias.Where(m => m.category == "TV Series"
+                           && m.title.ToLower().Contains(_searchWord.ToLower())))
     {
         <p>@media.title</p>
         <button @onclick="() => AddToBookMarked(media)">add</button>
     }
-}*@
+}
 
 
 @code
 {
+    private string _searchWord = "";
+
     protected override void OnInitialized()
     {
-        if (BookMarkedState.Value.Medias is null)
+        if (MediaState.Value.Medias is null)
         {
-            Facade.LoadBookMarked();
+            Facade.LoadMedia();
         }
 
         base.OnInitialized();
