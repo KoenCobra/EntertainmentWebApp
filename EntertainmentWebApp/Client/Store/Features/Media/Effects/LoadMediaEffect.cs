@@ -3,12 +3,12 @@ using EntertainmentWebApp.Client.Store.Features.Media.Actions.LoadMedia;
 
 namespace EntertainmentWebApp.Client.Store.Features.Media.Effects;
 
-public class LoadBookMarkedEffect : Effect<LoadMediaAction>
+public class LoadMediaEffect : Effect<LoadMediaAction>
 {
     private readonly HttpClient _httpClient;
-    private readonly ILogger<LoadBookMarkedEffect> _logger;
+    private readonly ILogger<LoadMediaEffect> _logger;
 
-    public LoadBookMarkedEffect(ILogger<LoadBookMarkedEffect> logger, HttpClient httpClient)
+    public LoadMediaEffect(ILogger<LoadMediaEffect> logger, HttpClient httpClient)
     {
         _logger = logger;
         _httpClient = httpClient;

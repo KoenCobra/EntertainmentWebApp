@@ -1,0 +1,34 @@
+﻿@inherits FluxorComponent
+@inject IState<MediaState> MediaState
+@inject StateFacade Facade
+
+@if (MediaState.Value.IsLoading)
+{
+}
+
+else if (MediaState.Value.HasCurrentErrors)
+{
+    <p>Whoops! Looks like an issue occurred loading media :(</p>
+}
+
+else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
+{
+    @foreach (var media in MediaState.Value.Medias
+       .Where(m => SearchWord != null && m.title != null
+                   && m.category == "Movie"
+                   && m.isTrending
+                   && m.title.ToLower().Contains(SearchWord.ToLower())))
+    {
+        <p>@media.title</p>
+        <button @onclick="() => AddToBookMarked(media)">add</button>
+    }
+}
+@code {
+    [Parameter]
+    public string? SearchWord { get; set; }
+
+    private void AddToBookMarked(Media bookMedia)
+    {
+        bookMedia.isBookmarked = true;
+    }
+}

@@ -14,7 +14,7 @@ public class StateFacade
 
     public void LoadMedia()
     {
-        _logger.LogInformation("Issuing action to load bookmarked...");
+        _logger.LogInformation("Issuing action to load media...");
         _dispatcher.Dispatch(new LoadMediaAction());
     }
 }

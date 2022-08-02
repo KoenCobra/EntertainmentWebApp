@@ -9,18 +9,9 @@
            @bind="_searchWord" @bind:event="oninput" />
 </div>
 
-<h2 class="trending">Trending</h2>
+<TrendingMovieComponent SearchWord="@_searchWord"/>
 
-@if(!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
-{
-@foreach (var media in MediaState.Value.Medias
- .Where(m => m.isTrending && m.title.ToLower().Contains(_searchWord.ToLower())))
-{
-    <p>@media.title</p>
-    <button @onclick="() => AddToBookMarked(media)">add</button>
-}
-}
-
+    <h2>Recommended for you</h2>
 @if (MediaState.Value.IsLoading)
 {
 }
@@ -31,7 +22,6 @@ else if (MediaState.Value.HasCurrentErrors)
 }
 else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
 {
-    <h2>Recommended for you</h2>
     @foreach (var media in MediaState.Value.Medias
      .Where(m => m.title.ToLower().Contains(_searchWord.ToLower())
          && m.isTrending == false
