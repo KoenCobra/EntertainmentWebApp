@@ -1,25 +1,13 @@
-﻿@inherits FluxorComponent
-@inject IState<MediaState> MediaState
-@inject StateFacade Facade
-
-<div class="search-component">
+﻿<div class="search-component">
     <img class="search-icon" src="Assets/icon-search.svg" alt=""/>
-    <input class="input-field" type="text" placeholder="Search for movies or TV series"
+    <input class="input-field" type="text" placeholder="@Placeholder"
            @bind="SearchWord" @bind:event="oninput"/>
 </div>
 
 @code {
     [Parameter]
-    public string? SearchWord { get; set; } = "";
+    public string? SearchWord { get; set; }
 
-    
-    protected override void OnInitialized()
-    {
-        if (MediaState.Value.Medias is null)
-        {
-            Facade.LoadMedia();
-        }
-
-        base.OnInitialized();
-    }   
+    [Parameter]
+    public string? Placeholder { get; set; }
 }

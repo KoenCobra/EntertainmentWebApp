@@ -1,6 +1,12 @@
-﻿@inherits FluxorComponent
+﻿@page "/movies"
+@inherits FluxorComponent
 @inject IState<MediaState> MediaState
-@inject StateFacade Facade
+
+<div class="search-component">
+    <img class="search-icon" src="Assets/icon-search.svg" alt="" />
+    <input class="input-field" type="text" placeholder="Search for movies or TV series"
+           @bind="SearchWord" @bind:event="oninput" />
+</div>
 
 @if (MediaState.Value.IsLoading)
 {
@@ -14,18 +20,14 @@ else if (MediaState.Value.HasCurrentErrors)
 else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
 {
     @foreach (var media in MediaState.Value.Medias
-       .Where(m => SearchWord != null && m.title != null
-                   && m.category == "Movie"
-                   && m.isTrending
-                   && m.title.ToLower().Contains(SearchWord.ToLower())))
+      .Where(m => m.category == "Movie" && m.title.ToLower().Contains(SearchWord.ToLower())))
     {
         <p>@media.title</p>
         <button @onclick="() => AddToBookMarked(media)">add</button>
     }
 }
 @code {
-    [Parameter]
-    public string? SearchWord { get; set; }
+    private string? SearchWord { get; set; } = string.Empty;
 
     private void AddToBookMarked(Media bookMedia)
     {

@@ -25,6 +25,7 @@ public class LoadMediaEffect : Effect<LoadMediaAction>
             var response =
                 await _httpClient.GetFromJsonAsync<IEnumerable<EntertainmentWebApp.Shared.Media>>("data.json");
 
+
             _logger.LogInformation("Media loaded successfully!");
 
             if (response != null)
