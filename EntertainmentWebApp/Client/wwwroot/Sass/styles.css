@@ -2,6 +2,7 @@
 /* Box sizing rules */
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap");
 *,
 *::before,
 *::after {
@@ -41,6 +42,7 @@ body {
   font-family: "Outfit", sans-serif;
   background-color: #10141E;
   color: #FFFFFF;
+  overflow: hidden;
 }
 
 /* A elements that don't have a class get default styles */
@@ -80,17 +82,39 @@ select {
 }
 .main {
   display: flex;
-}
-
-.navbar {
-  width: 8rem;
-  height: 100vh;
+  padding-top: 2rem;
+  padding-left: 2rem;
+  padding-top: 2rem;
 }
 
 .content {
   height: 100vh;
   width: 100%;
   overflow-y: scroll;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #161D2F;
+  border-radius: 20px;
+  width: 6rem;
+  height: calc(100vh - 4rem);
+  padding: 1.8rem;
+  margin-right: 2.25rem;
+}
+.navbar .nav-links {
+  flex-grow: 1;
+  justify-self: flex-start;
+  padding-top: 4.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.navbar .active-link {
+  filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(170deg) brightness(106%) contrast(100%);
 }
 
 .search-component {

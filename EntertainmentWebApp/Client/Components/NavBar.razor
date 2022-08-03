@@ -1,7 +1,17 @@
 ﻿<div class="navbar">
-    <NavLink href="bookmarked">bookmarked</NavLink>
-    <NavLink href="movies">movies</NavLink>
-    <NavLink href="series">series</NavLink>
+    <div class="logo">
+        <img src="Assets/logo.svg" alt="" />
+    </div>
+    <div class="nav-links">
+        
+        <NavLink ActiveClass="active-link" href="/"><img src="Assets/icon-nav-home.svg"/></NavLink>
+        <NavLink ActiveClass="active-link" href="movies"><img src="Assets/icon-nav-movies.svg" alt="" /></NavLink>
+        <NavLink ActiveClass="active-link" href="series"><img src="Assets/icon-nav-tv-series.svg" alt="" /></NavLink>
+        <NavLink ActiveClass="active-link" href="bookmarked"><img src="Assets/icon-nav-bookmark.svg" alt="" /></NavLink>
+    </div>
+    <div class="user-icon">
+        <img src="Assets/image-avatar.png" alt="" />
+    </div>
 </div>
 
 @code {
