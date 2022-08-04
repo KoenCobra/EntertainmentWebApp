@@ -1,4 +1,26 @@
-﻿.search-component{
+﻿@import "_Config.scss";
+
+.search-component {
     display: flex;
     align-items: center;
+    padding: 1rem 0;
+
+    .input-field {
+        background-color: transparent;
+        border: 0;
+        outline: none;
+        width: 100%;
+        color: $white;
+        margin-left: 1.5rem;
+        font-weight: 300;
+        font-size: 1.5rem;
+    }
+}
+
+::placeholder {
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    mix-blend-mode: normal;
+    opacity: 0.5;
 }

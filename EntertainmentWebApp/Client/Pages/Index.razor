@@ -2,13 +2,13 @@
 @inherits FluxorComponent
 @inject IState<MediaState> MediaState
 @inject StateFacade Facade
-
+@*
 <div class="search-component">
     <img class="search-icon" src="Assets/icon-search.svg" alt="" />
     <input class="input-field" type="text" placeholder="Search for movies or TV series"
            @bind="_searchWord" @bind:event="oninput" />
-</div>
-
+</div>*@
+<SearchComponent SearchWord="@_searchWord"/>
 <TrendingMovieComponent SearchWord="@_searchWord" />
 
 <h2>Recommended for you</h2>
