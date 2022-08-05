@@ -1,9 +1,10 @@
 ﻿@inherits FluxorComponent
 @inject IState<MediaState> MediaState
+
 <div class="search-component">
     <img class="search-icon" src="Assets/icon-search.svg" alt=""/>
     <input class="input-field" type="text" placeholder="@Placeholder"
-           @bind-value="SearchWord" @bind-value:event="oninput" list="@MediaState.Value.Medias"/>
+           @bind="SearchWord" @bind:event="oninput"/>
 </div>
 
 @code {

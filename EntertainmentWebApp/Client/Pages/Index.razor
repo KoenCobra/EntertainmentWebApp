@@ -1,13 +1,13 @@
 ﻿@page "/"
-@using EntertainmentWebApp.Client.Models
 @inherits FluxorComponent
 @inject IState<MediaState> MediaState
 @inject StateFacade Facade
 
-<SearchComponent SearchWord="@_searchWord" Placeholder="Search for movies or TV series"/>
-<TrendingMediaComponent SearchWord="@_searchWord" />
+<SearchComponent SearchWord="@_searchWord" Placeholder="Search for movies or TV series" />
+<TrendingMediaComponent SearchWord="@_searchWord" Media="MediaState.Value.Medias" />
 
 <h2 class="recommended">Recommended for you</h2>
+
 @if (MediaState.Value.IsLoading)
 {
 }
@@ -18,13 +18,7 @@ else if (MediaState.Value.HasCurrentErrors)
 }
 else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
 {
-    @foreach (var media in MediaState.Value.Medias
-    .Where(m => m.title != null && m.title.ToLower().Contains(_searchWord.ToLower()) && m.isTrending == false
-        ))
-    {
-        <p>@media.title</p>
-        <button @onclick="() => AddToBookMarked(media)">add</button>
-    }
+    <MediaComponent SearchWord="@_searchWord" MovieCategory="Movie" TvCategory="TV Series" Media="MediaState.Value.Medias"/>
 }
 
 
@@ -40,11 +34,6 @@ else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
         }
 
         base.OnInitialized();
-    }
-
-    private void AddToBookMarked(Media media)
-    {
-        media.isBookmarked = true;
     }
 }
 

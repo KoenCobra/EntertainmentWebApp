@@ -14,7 +14,7 @@
         animation-fill-mode: both;
         animation-delay: 1000ms;
 
-        @for $i from 1 through 5 {
+        @for $i from 1 through 10 {
             &:nth-child(#{$i}) {
                 animation-delay: $i * 100ms;
             }
@@ -28,7 +28,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background-color: rgba(0,0,0,0.3);
+            background-color: rgba(0,0,0,0.4);
             opacity: 0;
             transition: $transition;
             z-index: -1;
@@ -60,6 +60,9 @@
             cursor: pointer;
             transition: $transition;
 
+            &:hover{
+                transform: scale(1.1);
+            }
 
             .bookmarked-img {
             }
@@ -79,7 +82,7 @@
                 font-size: 0.937rem;
                 color: $white;
                 mix-blend-mode: normal;
-                opacity: 0.75;
+                opacity: 0.8;
             }
 
             .media-title p {

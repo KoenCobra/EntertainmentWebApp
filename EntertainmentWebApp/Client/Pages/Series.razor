@@ -1,37 +1,11 @@
 ﻿@page "/series"
-@using EntertainmentWebApp.Client.Models
 @inherits FluxorComponent
 @inject IState<MediaState> MediaState
 
-<div class="search-component">
-    <img class="search-icon" src="Assets/icon-search.svg" alt="" />
-    <input class="input-field" type="text" placeholder="Search for movies or TV series"
-           @bind="SearchWord" @bind:event="oninput"/>
-</div>
+<SearchComponent SearchWord="@SearchWord" Placeholder="Search for movies"/>
+<h2 class="movies">Movies</h2>
+<MediaComponent SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series" Media="MediaState.Value.Medias"/>
 
-@if (MediaState.Value.IsLoading)
-{
-}
-
-else if (MediaState.Value.HasCurrentErrors)
-{
-    <p>Whoops! Looks like an issue occurred loading media :(</p>
-}
-
-else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
-{
-    @foreach (var media in MediaState.Value.Medias
-        .Where(m => m.category == "TV Series" && m.title.ToLower().Contains(SearchWord.ToLower())))
-    {
-        <p>@media.title</p>
-        <button @onclick="() => AddToBookMarked(media)">add</button>
-    }
-}
 @code {
     private string? SearchWord { get; set; } = string.Empty;
-
-    private void AddToBookMarked(Media bookMedia)
-    {
-        bookMedia.isBookmarked = true;
-    }
 }

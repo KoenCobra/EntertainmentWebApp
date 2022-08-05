@@ -1,0 +1,141 @@
+﻿@import "_Config.scss";
+
+.media-card-section {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding-right: 2rem;
+
+    .media-card {
+        position: relative;
+        cursor: pointer;
+        animation: regularCard 0.3s ease-in-out;
+        animation-fill-mode: both;
+        animation-delay: 1000ms;
+
+        @for $i from 1 through 10000 {
+            &:nth-child(#{$i}) {
+                animation-delay: $i * 50ms;
+            }
+        }
+
+        .media-img-container {
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-color: rgba(0,0,0,0.4);
+                opacity: 0;
+                transition: $transition;
+            }
+
+            &:hover::after {
+                opacity: 1;
+            }
+
+            &:hover .play-container {
+                opacity: 1;
+            }
+
+            .media-img {
+                border-radius: 8px;
+            }
+
+            .play-container {
+                width: 117px;
+                height: 48px;
+                display: grid;
+                place-items: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                transition: $transition;
+                z-index: 2;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background: $white;
+                    mix-blend-mode: normal;
+                    opacity: 0.25;
+                    z-index: -1;
+                    border-radius: 28.5px;
+                }
+
+                .play {
+                    display: flex;
+                    align-items: center;
+                    padding-left: 0.5625rem;
+                    width: 100%;
+
+                    img {
+                        padding-right: 1.1875rem;
+                    }
+
+                    p {
+                        font-weight: 500;
+                        font-size: 1.125rem;
+                    }
+                }
+            }
+        }
+
+        .bookmarked-img-container {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: $darkBlue;
+            mix-blend-mode: normal;
+            opacity: 0.5;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: $transition;
+            z-index: 2;
+
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        .media-info {
+            padding-top: 0.5rem;
+
+            .media-year {
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+                font-weight: 300;
+                font-size: 0.8125rem;
+                color: $white;
+                mix-blend-mode: normal;
+                opacity: 0.75;
+            }
+
+            .media-title p {
+                font-weight: 500;
+                font-size: 1.125rem;
+            }
+        }
+    }
+}
+
+@keyframes regularCard {
+    0% {
+        opacity: 0;
+        transform: translateX(3rem);
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
