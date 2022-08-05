@@ -1,10 +1,9 @@
 ﻿@page "/movies"
 @inherits FluxorComponent
-@inject IState<MediaState> MediaState
 
 <SearchComponent SearchWord="@SearchWord" Placeholder="Search for movies"/>
 <h2 class="movies">Movies</h2>
-<MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" Media="MediaState.Value.Medias"/>
+<MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null"/>
 
 @code {
     private string? SearchWord { get; set; } = string.Empty;

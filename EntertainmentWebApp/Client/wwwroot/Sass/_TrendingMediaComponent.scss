@@ -10,7 +10,7 @@
         min-height: 230px;
         position: relative;
         cursor: pointer;
-        animation: mediaCard 0.5s ease-in-out;
+        animation: mediaCard 0.5s ease-out;
         animation-fill-mode: both;
         animation-delay: 1000ms;
 
@@ -60,8 +60,9 @@
             cursor: pointer;
             transition: $transition;
 
-            &:hover{
+            &:hover {
                 transform: scale(1.1);
+                background: darken($darkBlue, 55%);
             }
 
             .bookmarked-img {

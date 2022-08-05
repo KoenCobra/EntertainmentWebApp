@@ -1,14 +1,13 @@
 ﻿@page "/bookmarked"
 @inherits FluxorComponent
-@inject IState<MediaState> MediaState
 
 <SearchComponent SearchWord="@SearchWord" Placeholder="Search for bookmarked shows"/>
 
 <h2 class="movies">Bookmarked Movies</h2>
-<MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" Media="MediaState.Value.Medias.Where(m=>m.isBookmarked)"/>
+<MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null"/>
 
 <h2 class="movies">Bookmarked TV Series</h2>
-<MediaComponent SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series" Media="MediaState.Value.Medias.Where(m=>m.isBookmarked)"/>
+<MediaComponent SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series"/>
 
 @code {
     private string? SearchWord { get; set; } = string.Empty;

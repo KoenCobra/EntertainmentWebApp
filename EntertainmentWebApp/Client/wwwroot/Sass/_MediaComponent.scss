@@ -9,7 +9,7 @@
     .media-card {
         position: relative;
         cursor: pointer;
-        animation: regularCard 0.3s ease-in-out;
+        animation: regularCard 0.3s ease-out;
         animation-fill-mode: both;
         animation-delay: 1000ms;
 
@@ -104,6 +104,7 @@
 
             &:hover {
                 transform: scale(1.1);
+                background: darken($darkBlue, 55%);
             }
         }
 

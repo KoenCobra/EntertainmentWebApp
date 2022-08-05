@@ -183,7 +183,7 @@ select {
   min-height: 230px;
   position: relative;
   cursor: pointer;
-  animation: mediaCard 0.5s ease-in-out;
+  animation: mediaCard 0.5s ease-out;
   animation-fill-mode: both;
   animation-delay: 1000ms;
 }
@@ -255,6 +255,7 @@ select {
 }
 .trending-section .trending-card .bookmarked-img-container:hover {
   transform: scale(1.1);
+  background: black;
 }
 .trending-section .trending-card .media-info {
   position: absolute;
@@ -362,7 +363,7 @@ select {
 .media-card-section .media-card {
   position: relative;
   cursor: pointer;
-  animation: regularCard 0.3s ease-in-out;
+  animation: regularCard 0.3s ease-out;
   animation-fill-mode: both;
   animation-delay: 1000ms;
 }
@@ -30440,6 +30441,7 @@ select {
 }
 .media-card-section .media-card .bookmarked-img-container:hover {
   transform: scale(1.1);
+  background: black;
 }
 .media-card-section .media-card .media-info {
   padding-top: 0.5rem;

@@ -3,12 +3,11 @@
 @inject IState<MediaState> MediaState
 @inject StateFacade Facade
 
-<h2 class="trending">Trending</h2>
 <div class="trending-section">
-    @if (!(Media is null) && Media.Any())
+    @if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
     {
-        @foreach (var media in Media
-       .Where(m => SearchWord != null && m.title != null && m.isTrending && m.title.ToLower().Contains(SearchWord.ToLower())))
+        @foreach (var media in MediaState.Value.Medias
+       .Where(m => SearchWord != null && m.title != null && m.isTrending && m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant())))
         {
             <div class="trending-card">
                 @if (media.isBookmarked)
@@ -61,9 +60,6 @@
 @code {
     [Parameter]
     public string? SearchWord { get; set; }
-
-    [Parameter]
-    public IEnumerable<Media>? Media { get; set; }
 
     private void AddToBookMarked(Media bookMedia)
     {
