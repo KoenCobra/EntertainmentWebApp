@@ -12,3 +12,26 @@
     width: 100%;
     overflow-y: scroll;
 }
+
+.recommended {
+    font-weight: 300;
+    font-size: 2rem;
+    letter-spacing: -0.5px;
+    color: $white;
+}
+
+.trending {
+    @extend .recommended;
+    margin-bottom: 1.5625rem;
+    margin-top: 0.6rem
+}
+
+.dot {
+    height: 3px;
+    width: 3px;
+    background: #FFFFFF;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+    border-radius: 50%;
+    display: inline-block;
+}

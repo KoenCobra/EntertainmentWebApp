@@ -23,7 +23,7 @@ public class LoadMediaEffect : Effect<LoadMediaAction>
 
             await Task.Delay(TimeSpan.FromMilliseconds(1000));
             var response =
-                await _httpClient.GetFromJsonAsync<IEnumerable<EntertainmentWebApp.Shared.Media>>("data.json");
+                await _httpClient.GetFromJsonAsync<IEnumerable<Models.Media>>("data.json");
 
 
             _logger.LogInformation("Media loaded successfully!");

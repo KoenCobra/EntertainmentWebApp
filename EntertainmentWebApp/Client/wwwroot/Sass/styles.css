@@ -4,6 +4,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap");
 *,
 *::before,
 *::after {
@@ -94,6 +96,28 @@ select {
   overflow-y: scroll;
 }
 
+.recommended, .trending {
+  font-weight: 300;
+  font-size: 2rem;
+  letter-spacing: -0.5px;
+  color: #FFFFFF;
+}
+
+.trending {
+  margin-bottom: 1.5625rem;
+  margin-top: 0.6rem;
+}
+
+.dot {
+  height: 3px;
+  width: 3px;
+  background: #FFFFFF;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 .navbar {
   display: flex;
   flex-direction: column;
@@ -146,4 +170,138 @@ select {
   color: #FFFFFF;
   mix-blend-mode: normal;
   opacity: 0.5;
+}
+
+.trending-section {
+  display: flex;
+  overflow-x: scroll;
+  gap: 2.5rem;
+}
+.trending-section .trending-card {
+  min-width: 470px;
+  min-height: 230px;
+  position: relative;
+  cursor: pointer;
+}
+.trending-section .trending-card:hover .play-container {
+  opacity: 1;
+}
+.trending-section .trending-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: all 0.2s ease-out;
+  z-index: -1;
+}
+.trending-section .trending-card:hover::after {
+  opacity: 1;
+}
+.trending-section .trending-card .trending-img {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 8px;
+}
+.trending-section .trending-card .bookmarked-img-container {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: #161D2F;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.trending-section .trending-card .media-info {
+  position: absolute;
+  bottom: 0;
+  padding-left: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.trending-section .trending-card .media-info .media-year {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: 300;
+  font-size: 0.937rem;
+  color: #FFFFFF;
+  mix-blend-mode: normal;
+  opacity: 0.75;
+}
+.trending-section .trending-card .media-info .media-title p {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+.trending-section .trending-card .play-container {
+  width: 117px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: relative;
+  opacity: 0;
+  transition: all 0.2s ease-out;
+}
+.trending-section .trending-card .play-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #FFFFFF;
+  mix-blend-mode: normal;
+  opacity: 0.25;
+  z-index: -1;
+  border-radius: 28.5px;
+}
+.trending-section .trending-card .play-container .play {
+  display: flex;
+  align-items: center;
+  padding-left: 0.5625rem;
+  width: 100%;
+}
+.trending-section .trending-card .play-container .play img {
+  padding-right: 1.1875rem;
+}
+.trending-section .trending-card .play-container .play p {
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+
+.trending-section::-webkit-scrollbar {
+  height: 7px;
+  width: 6px;
+  background: #5A698F;
+  border-radius: 100px;
+}
+
+.trending-section::-webkit-scrollbar-track {
+  background-color: #10141E;
+}
+
+.trending-section::-webkit-scrollbar-thumb:horizontal {
+  background: #5A698F;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #10141E;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 100px;
 }

@@ -1,0 +1,123 @@
+﻿@import "_Config.scss";
+
+.trending-section {
+    display: flex;
+    overflow-x: scroll;
+    gap: 2.5rem;
+
+    .trending-card {
+        min-width: 470px;
+        min-height: 230px;
+        position: relative;
+        cursor: pointer;
+
+        &:hover .play-container {
+            opacity: 1;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: $transition;
+            z-index: -1;
+        }
+
+        &:hover::after {
+            opacity: 1;
+        }
+
+        .trending-img {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            border-radius: 8px;
+        }
+
+        .bookmarked-img-container {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: $darkBlue;
+            mix-blend-mode: normal;
+            opacity: 0.5;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: $transition;
+
+
+            .bookmarked-img {
+            }
+        }
+
+        .media-info {
+            position: absolute;
+            bottom: 0;
+            padding-left: 1.5rem;
+            padding-bottom: 1.5rem;
+
+            .media-year {
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+                font-weight: 300;
+                font-size: 0.937rem;
+                color: $white;
+                mix-blend-mode: normal;
+                opacity: 0.75;
+            }
+
+            .media-title p {
+                font-weight: 500;
+                font-size: 1.5rem;
+            }
+        }
+
+        .play-container {
+            width: 117px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: relative;
+            opacity: 0;
+            transition: $transition;
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: $white;
+                mix-blend-mode: normal;
+                opacity: 0.25;
+                z-index: -1;
+                border-radius: 28.5px;
+            }
+
+            .play {
+                display: flex;
+                align-items: center;
+                padding-left: 0.5625rem;
+                width: 100%;
+
+                img {
+                    padding-right: 1.1875rem;
+                }
+
+                p {
+                    font-weight: 500;
+                    font-size: 1.125rem;
+                }
+            }
+        }
+    }
+}

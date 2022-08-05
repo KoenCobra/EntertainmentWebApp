@@ -21,7 +21,7 @@
         gap: 2.5rem;
 
         img {
-            transition: all 0.2s ease-out;
+            transition: $transition;
         }
 
         & img:hover {

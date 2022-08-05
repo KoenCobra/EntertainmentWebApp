@@ -2,10 +2,10 @@
 
 public class LoadMediaSuccessAction
 {
-    public LoadMediaSuccessAction(IEnumerable<EntertainmentWebApp.Shared.Media> medias)
+    public LoadMediaSuccessAction(IEnumerable<Models.Media> medias)
     {
         Media = medias;
     }
 
-    public IEnumerable<EntertainmentWebApp.Shared.Media> Media { get; }
+    public IEnumerable<Models.Media> Media { get; }
 }

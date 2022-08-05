@@ -1,4 +1,4 @@
-﻿using EntertainmentWebApp.Shared;
+﻿using EntertainmentWebApp.Client.Models;
 
 namespace EntertainmentWebApp.Client.Store.State;
 

@@ -1,0 +1,69 @@
+﻿@using EntertainmentWebApp.Client.Models
+@inherits FluxorComponent
+@inject IState<MediaState> MediaState
+@inject StateFacade Facade
+
+<h2 class="trending">Trending</h2>
+<div class="trending-section">
+    @if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
+    {
+        @foreach (var media in MediaState.Value.Medias
+       .Where(m => SearchWord != null && m.title != null && m.isTrending && m.title.ToLower().Contains(SearchWord.ToLower())))
+        {
+            <div class="trending-card">
+                @if (media.isBookmarked)
+                {
+                    <div @onclick="() => AddToBookMarked(media)" class="bookmarked-img-container">
+                        <img class="bookmarked-img" src="Assets/icon-bookmark-full.svg" />
+                    </div>
+                }
+                else
+                {
+                    <div @onclick="() => AddToBookMarked(media)" class="bookmarked-img-container">
+                        <img class="bookmarked-img" src="Assets/icon-bookmark-empty.svg" />
+                    </div>
+
+                }
+                <img class="trending-img" src="@media.thumbnail.trending.large" alt="trending-img" />
+                <div class="media-info">
+                    <div class="media-year">
+                        <p>@media.year</p>
+                        <span class="dot"></span>
+                        @if (media.category == "Movie")
+                        {
+                            <img src="Assets/icon-category-movie.svg" />
+                            <p>Movie</p>
+                        }
+                        else
+                        {
+                            <img src="Assets/icon-category-tv.svg" />
+                            <p>TV Serie</p>
+                        }
+                        <span class="dot"></span>
+                        <p>@media.rating</p>
+                    </div>
+
+                    <div class="media-title">
+                        <p>@media.title</p>
+                    </div>
+                </div>
+
+                <div class="play-container">
+                    <div class="play">
+                        <img src="Assets/icon-play.svg" alt="" />
+                        <p>Play</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+@code {
+    [Parameter]
+    public string? SearchWord { get; set; }
+
+    private void AddToBookMarked(Media bookMedia)
+    {
+        bookMedia.isBookmarked = !bookMedia.isBookmarked;
+    }
+}
