@@ -1,14 +1,39 @@
 ﻿@page "/bookmarked"
 @inherits FluxorComponent
+@inject IState<MediaState> MediaState
 
-<SearchComponent SearchWord="@SearchWord" Placeholder="Search for bookmarked shows"/>
+<div class="search-component">
+    <img class="search-icon" src="Assets/icon-search.svg" alt="search" />
+    <input class="input-field" type="text" placeholder="Search for bookmarked shows"
+           @bind-value="SearchWord" @bind-value:event="oninput" />
+</div>
 
-<h2 class="movies">Bookmarked Movies</h2>
-<MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null"/>
+@if (SearchWord == string.Empty)
+{
+    <h2 class="movies">Bookmarked Movies</h2>
+    <div class="search-result">
+        <MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="true"/>
+    </div>
 
-<h2 class="movies">Bookmarked TV Series</h2>
-<MediaComponent SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series"/>
+    <h2 class="movies">Bookmarked TV Series</h2>
+    <div class="search-result">
+        <MediaComponent SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true" />
+    </div>
+}
+else
+{
+    <h2 class="recommended">
+        Found
+        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant()) && m.isTrending == false && m.isBookmarked) results for ‘@SearchWord’</span>
+    </h2>
+    <div class="search-result">
+        <MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="true" />
+    </div>
 
+    <div class="search-result">
+        <MediaComponent SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true" />
+    </div>
+}
 @code {
     private string? SearchWord { get; set; } = string.Empty;
 }

@@ -1,9 +1,28 @@
 ﻿@page "/movies"
 @inherits FluxorComponent
+@inject IState<MediaState> MediaState
 
-<SearchComponent SearchWord="@SearchWord" Placeholder="Search for movies"/>
-<h2 class="movies">Movies</h2>
-<MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null"/>
+<div class="search-component">
+    <img class="search-icon" src="Assets/icon-search.svg" alt="search" />
+    <input class="input-field" type="text" placeholder="Search for movies"
+           @bind-value="SearchWord" @bind-value:event="oninput" />
+</div>
+
+@if (SearchWord == string.Empty)
+{
+    <h2 class="movies">Movies</h2>
+    <MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="false" />
+}
+else
+{
+    <h2 class="recommended">
+        Found
+        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant()) && m.category == "Movie" && m.isTrending == false) results for ‘@SearchWord’</span>
+    </h2>
+    <div class="search-result">
+        <MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="false" />
+    </div>
+}
 
 @code {
     private string? SearchWord { get; set; } = string.Empty;

@@ -12,6 +12,12 @@
     padding: 1.8rem;
     margin-right: 2.25rem;
 
+    @media (max-width: 1000px) {
+        flex-direction: row;
+        width: 98.1%;
+        height: 72px;
+    }
+
     .nav-links {
         flex-grow: 1;
         justify-self: flex-start;
@@ -20,12 +26,25 @@
         flex-direction: column;
         gap: 2.5rem;
 
+        @media (max-width: 1000px) {
+            flex-direction: row;
+            flex-grow: 0;
+            padding-top: 0;
+        }
+
         img {
             transition: $transition;
         }
 
         & img:hover {
             filter: brightness(0) invert(1);
+        }
+    }
+
+    .user-icon {
+        @media (max-width: 1000px) {
+            width: 2rem;
+            height: 2rem;
         }
     }
 

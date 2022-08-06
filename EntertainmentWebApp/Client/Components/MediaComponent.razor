@@ -3,7 +3,12 @@
 
 <div class="media-card-section">
     @foreach (var media in MediaState.Value.Medias
-        .Where(m => SearchWord != null && m.title != null && m.isTrending == false && m.title.ToLower().Contains(SearchWord.ToLower()) && (m.category == MovieCategory || m.category == TvCategory)))
+        .Where(m => SearchWord != null 
+                    && m.title != null 
+                    && m.isTrending == false 
+                    && m.title.ToLower().Contains(SearchWord.ToLower()) 
+                    && (m.category == MovieCategory || m.category == TvCategory) 
+                    && (m.isBookmarked == IsBookmarked || m.isBookmarked == NotBookmarked)))
     {
         <div class="media-card">
             @if (media.isBookmarked)
@@ -63,6 +68,12 @@
 
     [Parameter]
     public string? TvCategory { get; set; }
+
+    [Parameter]
+    public bool? IsBookmarked { get; set; }
+
+    [Parameter]
+    public bool? NotBookmarked { get; set; }
 
     private void AddToBookMarked(Media bookMedia)
     {

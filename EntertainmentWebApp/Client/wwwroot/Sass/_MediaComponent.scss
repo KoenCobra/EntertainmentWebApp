@@ -6,6 +6,10 @@
     gap: 2rem;
     padding-right: 2rem;
 
+    @media (max-width: 1000px) {
+        padding-right: 1rem;
+    }
+
     .media-card {
         position: relative;
         cursor: pointer;
@@ -133,7 +137,11 @@
 .search-result {
     .media-card-section {
         display: grid;
-        grid-template-columns: repeat( auto-fit, 280px);
+        grid-template-columns: repeat( auto-fill, 280px);
+
+        @media (max-width: 1000px) {
+            grid-template-columns: repeat( auto-fill, minmax(280px, 1fr));
+        }
     }
 }
 
