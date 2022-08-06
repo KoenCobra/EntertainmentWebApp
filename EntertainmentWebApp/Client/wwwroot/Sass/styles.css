@@ -314,6 +314,10 @@ select {
   font-size: 1.125rem;
 }
 
+.trending-search-result .trending-section .trending-card {
+  margin-bottom: 1.8rem;
+}
+
 @keyframes mediaCard {
   0% {
     opacity: 0;
@@ -30459,6 +30463,11 @@ select {
 .media-card-section .media-card .media-info .media-title p {
   font-weight: 500;
   font-size: 1.125rem;
+}
+
+.search-result .media-card-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 280px);
 }
 
 @keyframes regularCard {

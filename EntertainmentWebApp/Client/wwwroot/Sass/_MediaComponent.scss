@@ -130,6 +130,13 @@
     }
 }
 
+.search-result {
+    .media-card-section {
+        display: grid;
+        grid-template-columns: repeat( auto-fit, 280px);
+    }
+}
+
 @keyframes regularCard {
     0% {
         opacity: 0;

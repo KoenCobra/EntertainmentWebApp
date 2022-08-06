@@ -32,23 +32,17 @@
 }
 else
 {
-    <h2 class="recommended">Found 
-        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(_searchWord.ToLowerInvariant())) results for ‘@_searchWord’</span></h2>
-    <TrendingMediaComponent SearchWord="@_searchWord" />
-
-
-    @if (MediaState.Value.IsLoading)
-    {
-    }
-
-    else if (MediaState.Value.HasCurrentErrors)
-    {
-        <p>Whoops! Looks like an issue occurred loading media :(</p>
-    }
-    else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
-    {
+    <h2 class="recommended">
+        Found
+        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(_searchWord.ToLowerInvariant())) results for ‘@_searchWord’</span>
+    </h2>
+    <div class="trending-search-result">
+        <TrendingMediaComponent SearchWord="@_searchWord" />
+    </div>
+    <div class="search-result">
         <MediaComponent SearchWord="@_searchWord" MovieCategory="Movie" TvCategory="TV Series" />
-    }
+    </div>
+
 }
 
 

@@ -1,0 +1,71 @@
+﻿@inherits FluxorComponent
+@inject IState<MediaState> MediaState
+
+<div class="media-card-section">
+    @foreach (var media in MediaState.Value.Medias
+        .Where(m => SearchWord != null && m.title != null && m.isTrending == false && m.title.ToLower().Contains(SearchWord.ToLower()) && (m.category == MovieCategory || m.category == TvCategory)))
+    {
+        <div class="media-card">
+            @if (media.isBookmarked)
+            {
+                <div @onclick="() => AddToBookMarked(media)" class="bookmarked-img-container">
+                    <img src="Assets/icon-bookmark-full.svg" />
+                </div>
+            }
+            else
+            {
+                <div @onclick="() => AddToBookMarked(media)" class="bookmarked-img-container">
+                    <img src="Assets/icon-bookmark-empty.svg" />
+                </div>
+
+            }
+            <div class="media-img-container">
+                <img class="media-img" src="@media.thumbnail.regular.large" alt="media-img" loading="lazy" />
+                <div class="play-container">
+                    <div class="play">
+                        <img src="Assets/icon-play.svg" alt="" />
+                        <p>Play</p>
+                    </div>
+                </div>
+            </div>
+            <div class="media-info">
+                <div class="media-year">
+                    <p>@media.year</p>
+                    <span class="dot"></span>
+                    @if (media.category == "Movie")
+                    {
+                        <img src="Assets/icon-category-movie.svg" />
+                        <p>Movie</p>
+                    }
+                    else
+                    {
+                        <img src="Assets/icon-category-tv.svg" />
+                        <p>TV Serie</p>
+                    }
+                    <span class="dot"></span>
+                    <p>@media.rating</p>
+                </div>
+
+                <div class="media-title">
+                    <p>@media.title</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string? SearchWord { get; set; }
+
+    [Parameter]
+    public string? MovieCategory { get; set; }
+
+    [Parameter]
+    public string? TvCategory { get; set; }
+
+    private void AddToBookMarked(Media bookMedia)
+    {
+        bookMedia.isBookmarked = !bookMedia.isBookmarked;
+    }
+}
