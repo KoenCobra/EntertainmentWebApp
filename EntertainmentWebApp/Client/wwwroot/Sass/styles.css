@@ -115,6 +115,16 @@ select {
   color: #FFFFFF;
   padding: 1rem 0 2rem 0;
 }
+@media (max-width: 1000px) {
+  .recommended, .movies, .trending {
+    padding: 1rem 0 1rem 0;
+  }
+}
+@media (max-width: 425px) {
+  .recommended, .movies, .trending {
+    padding: 0.5rem 0 1rem 0;
+  }
+}
 
 .dot {
   height: 3px;
@@ -124,6 +134,21 @@ select {
   opacity: 0.5;
   border-radius: 50%;
   display: inline-block;
+}
+
+.app {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  width: 120px;
+  height: 70px;
+}
+.app img {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
 }
 
 .navbar {
@@ -141,7 +166,7 @@ select {
 @media (max-width: 1000px) {
   .navbar {
     flex-direction: row;
-    width: 98.1%;
+    width: 97%;
     height: 72px;
   }
 }
@@ -193,7 +218,7 @@ select {
   color: #FFFFFF;
   margin-left: 1.5rem;
   font-weight: 300;
-  font-size: 1.5rem;
+  font-size: clamp(0.8rem, 5vw, 1.5rem);
 }
 
 ::placeholder {
@@ -207,7 +232,7 @@ select {
 .trending-section {
   display: flex;
   overflow-x: scroll;
-  gap: 2.5rem;
+  gap: clamp(1.8rem, 5vw, 2.5rem);
 }
 .trending-section .trending-card {
   min-width: 470px;
@@ -217,6 +242,12 @@ select {
   animation: mediaCard 0.5s ease-out;
   animation-fill-mode: both;
   animation-delay: 1000ms;
+}
+@media (max-width: 425px) {
+  .trending-section .trending-card {
+    min-width: 260px;
+    min-height: 125px;
+  }
 }
 .trending-section .trending-card:nth-child(1) {
   animation-delay: 100ms;
@@ -294,6 +325,12 @@ select {
   padding-left: 1.5rem;
   padding-bottom: 1.5rem;
 }
+@media (max-width: 425px) {
+  .trending-section .trending-card .media-info {
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
+  }
+}
 .trending-section .trending-card .media-info .media-year {
   display: flex;
   gap: 0.5rem;
@@ -304,9 +341,14 @@ select {
   mix-blend-mode: normal;
   opacity: 0.8;
 }
+@media (max-width: 425px) {
+  .trending-section .trending-card .media-info .media-year {
+    font-size: 0.7rem;
+  }
+}
 .trending-section .trending-card .media-info .media-title p {
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 5vw, 1.5rem);
 }
 .trending-section .trending-card .play-container {
   width: 117px;
@@ -331,6 +373,12 @@ select {
   z-index: -1;
   border-radius: 28.5px;
 }
+@media (max-width: 425px) {
+  .trending-section .trending-card .play-container::after {
+    background: gray;
+    opacity: 0.7;
+  }
+}
 .trending-section .trending-card .play-container .play {
   display: flex;
   align-items: center;
@@ -342,7 +390,7 @@ select {
 }
 .trending-section .trending-card .play-container .play p {
   font-weight: 500;
-  font-size: 1.125rem;
+  font-size: clamp(0.8rem, 5vw, 1.125rem);
 }
 
 @keyframes mediaCard {
@@ -395,6 +443,18 @@ select {
 @media (max-width: 1000px) {
   .media-card-section {
     padding-right: 1rem;
+  }
+}
+@media (max-width: 425px) {
+  .media-card-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+@media (max-width: 425px) {
+  .media-card-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 }
 .media-card-section .media-card {
@@ -30488,14 +30548,14 @@ select {
   gap: 0.5rem;
   align-items: center;
   font-weight: 300;
-  font-size: 0.8125rem;
+  font-size: clamp(0.5rem, 3vw, 0.8125rem);
   color: #FFFFFF;
   mix-blend-mode: normal;
   opacity: 0.75;
 }
 .media-card-section .media-card .media-info .media-title p {
   font-weight: 500;
-  font-size: 1.125rem;
+  font-size: clamp(0.8rem, 4vw, 1.125rem);
 }
 
 .search-result .media-card-section {
