@@ -10,17 +10,16 @@
 
 @if (SearchWord == string.Empty)
 {
-    <h2 class="movies">Movies</h2>
-    <MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="false" />
+    <MediaComponent Heading="Movies" SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null"/>
 }
 else
 {
     <h2 class="recommended">
         Found
-        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant()) && m.category == "Movie" && m.isTrending == false) results for ‘@SearchWord’</span>
+        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant()) && m.category == "Movie") results for ‘@SearchWord’</span>
     </h2>
     <div class="search-result">
-        <MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="false" />
+        <SearchResultComponent SearchWord="@SearchWord" MovieCategory="Movie"/>
     </div>
 }
 

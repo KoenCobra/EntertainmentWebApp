@@ -69,10 +69,10 @@
     public string? TvCategory { get; set; }
 
     [Parameter]
-    public bool? IsBookmarked { get; set; }
+    public bool? IsBookmarked { get; set; } = true;
 
     [Parameter]
-    public bool? NotBookmarked { get; set; }
+    public bool? NotBookmarked { get; set; } = false;
 
     private void AddToBookMarked(Media bookMedia)
     {

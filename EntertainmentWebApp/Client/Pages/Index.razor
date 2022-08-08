@@ -9,38 +9,32 @@
            @bind-value="_searchWord" @bind-value:event="oninput" />
 </div>
 
-@if (_searchWord == string.Empty)
+@if (MediaState.Value.IsLoading)
 {
-    <h2 class="trending">Trending</h2>
-
-    <TrendingMediaComponent SearchWord="@_searchWord" />
-
-    <h2 class="recommended">Recommended for you</h2>
-
-    @if (MediaState.Value.IsLoading)
-    {
-    }
-
-    else if (MediaState.Value.HasCurrentErrors)
-    {
-        <p>Whoops! Looks like an issue occurred loading media :(</p>
-    }
-    else if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
-    {
-        <MediaComponent SearchWord="@_searchWord" MovieCategory="Movie" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="false" />
-    }
+    <p class="loading-media">Media is loading...</p>
 }
 else
 {
-    <h2 class="recommended">
-        Found
-        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(_searchWord.ToLowerInvariant())) results for ‘@_searchWord’</span>
-    </h2>
+    @if (_searchWord == string.Empty)
+    {
+        <TrendingMediaComponent SearchWord="@_searchWord" Heading="Trending" />
 
-    <div class="search-result">
-        <SearchResultComponent SearchWord="@_searchWord" MovieCategory="Movie" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="false"/>
-    </div>
+        if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
+        {
+            <MediaComponent Heading="Recommended for you" SearchWord="@_searchWord" MovieCategory="Movie" TvCategory="TV Series" IsTrending="false"/>
+        }
+    }
+    else
+    {
+        <h2 class="recommended">
+            Found
+            <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(_searchWord.ToLowerInvariant())) results for ‘@_searchWord’</span>
+        </h2>
 
+        <div class="search-result">
+            <SearchResultComponent SearchWord="@_searchWord" MovieCategory="Movie" TvCategory="TV Series"/>
+        </div>
+    }
 }
 
 

@@ -8,30 +8,25 @@
            @bind-value="SearchWord" @bind-value:event="oninput" />
 </div>
 
+
 @if (SearchWord == string.Empty)
 {
-    <h2 class="movies">Bookmarked Movies</h2>
     <div class="search-result">
-        <MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="true"/>
+        <MediaComponent Heading="Bookmarked movies" SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="true" IsTrending="true" IsNotTrending="false"/>
     </div>
 
-    <h2 class="movies">Bookmarked TV Series</h2>
     <div class="search-result">
-        <MediaComponent SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true" />
+        <MediaComponent Heading="Bookmarked TV Series" SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true" IsTrending="true" IsNotTrending="false"/>
     </div>
 }
 else
 {
     <h2 class="recommended">
         Found
-        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant()) && m.isTrending == false && m.isBookmarked) results for ‘@SearchWord’</span>
+        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant()) && m.isBookmarked) results for ‘@SearchWord’</span>
     </h2>
     <div class="search-result">
-        <MediaComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="true" />
-    </div>
-
-    <div class="search-result">
-        <MediaComponent SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true" />
+        <SearchResultComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true"/>
     </div>
 }
 @code {
