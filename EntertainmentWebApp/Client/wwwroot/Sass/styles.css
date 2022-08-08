@@ -464,12 +464,6 @@ select {
     gap: 1rem;
   }
 }
-@media (max-width: 425px) {
-  .media-card-section {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-}
 .media-card-section .media-card {
   position: relative;
   cursor: pointer;
@@ -30510,6 +30504,12 @@ select {
   transition: all 0.2s ease-out;
   z-index: 2;
 }
+@media (max-width: 425px) {
+  .media-card-section .media-card .media-img-container .play-container {
+    width: 30px;
+    height: 30px;
+  }
+}
 .media-card-section .media-card .media-img-container .play-container::after {
   content: "";
   position: absolute;
@@ -30526,12 +30526,27 @@ select {
   padding-left: 0.5625rem;
   width: 100%;
 }
+@media (max-width: 425px) {
+  .media-card-section .media-card .media-img-container .play-container .play {
+    padding-left: 0;
+  }
+}
 .media-card-section .media-card .media-img-container .play-container .play img {
   padding-right: 1.1875rem;
+}
+@media (max-width: 425px) {
+  .media-card-section .media-card .media-img-container .play-container .play img {
+    padding-right: 0;
+  }
 }
 .media-card-section .media-card .media-img-container .play-container .play p {
   font-weight: 500;
   font-size: 1.125rem;
+}
+@media (max-width: 425px) {
+  .media-card-section .media-card .media-img-container .play-container .play p {
+    display: none;
+  }
 }
 .media-card-section .media-card .bookmarked-img-container {
   width: 32px;
@@ -30548,6 +30563,12 @@ select {
   cursor: pointer;
   transition: all 0.2s ease-out;
   z-index: 2;
+}
+@media (max-width: 425px) {
+  .media-card-section .media-card .bookmarked-img-container {
+    top: 0.5rem;
+    right: 1rem;
+  }
 }
 .media-card-section .media-card .bookmarked-img-container:hover {
   transform: scale(1.1);

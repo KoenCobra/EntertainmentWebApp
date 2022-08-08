@@ -15,11 +15,6 @@
         gap: 1rem;
     }
 
-    @media (max-width: 425px) {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-    }
-
     .media-card {
         position: relative;
         cursor: pointer;
@@ -70,6 +65,11 @@
                 transition: $transition;
                 z-index: 2;
 
+                @media (max-width: 425px) {
+                    width: 30px;
+                    height: 30px;
+                }
+
                 &::after {
                     content: "";
                     position: absolute;
@@ -87,13 +87,25 @@
                     padding-left: 0.5625rem;
                     width: 100%;
 
+                    @media (max-width: 425px) {
+                        padding-left: 0;
+                    }
+
                     img {
                         padding-right: 1.1875rem;
+
+                        @media (max-width: 425px) {
+                            padding-right: 0;
+                        }
                     }
 
                     p {
                         font-weight: 500;
                         font-size: 1.125rem;
+
+                        @media (max-width: 425px) {
+                            display: none;
+                        }
                     }
                 }
             }
@@ -115,6 +127,10 @@
             transition: $transition;
             z-index: 2;
 
+            @media (max-width: 425px) {
+                top: 0.5rem;
+                right: 1rem;
+            }
 
             &:hover {
                 transform: scale(1.1);

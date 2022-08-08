@@ -1,6 +1,7 @@
 ﻿@page "/series"
 @inherits FluxorComponent
 @inject IState<MediaState> MediaState
+@inject StateFacade Facade
 
 <div class="search-component">
     <img class="search-icon" src="Assets/icon-search.svg" alt="search" />
@@ -26,4 +27,14 @@ else
 }
 @code {
     private string? SearchWord { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        if (MediaState.Value.Medias is null)
+        {
+            Facade.LoadMedia();
+        }
+
+        base.OnInitialized();
+    }
 }

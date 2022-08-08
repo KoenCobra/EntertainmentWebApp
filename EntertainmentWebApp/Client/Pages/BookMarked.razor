@@ -1,6 +1,7 @@
 ﻿@page "/bookmarked"
 @inherits FluxorComponent
 @inject IState<MediaState> MediaState
+@inject StateFacade Facade
 
 <div class="search-component">
     <img class="search-icon" src="Assets/icon-search.svg" alt="search" />
@@ -8,27 +9,44 @@
            @bind-value="SearchWord" @bind-value:event="oninput" />
 </div>
 
-
-@if (SearchWord == string.Empty)
+@if (!MediaState.Value.Medias.Any())
 {
-    <div class="search-result">
-        <MediaComponent Heading="Bookmarked movies" SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="true" IsTrending="true" IsNotTrending="false"/>
-    </div>
-
-    <div class="search-result">
-        <MediaComponent Heading="Bookmarked TV Series" SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true" IsTrending="true" IsNotTrending="false"/>
-    </div>
+    <p>Nothing bookmarked</p>
 }
 else
 {
-    <h2 class="recommended">
-        Found
-        <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant()) && m.isBookmarked) results for ‘@SearchWord’</span>
-    </h2>
-    <div class="search-result">
-        <SearchResultComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true"/>
-    </div>
+
+    @if (SearchWord == string.Empty)
+    {
+        <div class="search-result">
+            <MediaComponent Heading="Bookmarked movies" SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="null" IsBookmarked="true" NotBookmarked="true" IsTrending="true" IsNotTrending="false" />
+        </div>
+
+        <div class="search-result">
+            <MediaComponent Heading="Bookmarked TV Series" SearchWord="@SearchWord" MovieCategory="null" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true" IsTrending="true" IsNotTrending="false" />
+        </div>
+    }
+    else
+    {
+        <h2 class="recommended">
+            Found
+            <span>@MediaState.Value.Medias.Count(m => m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant()) && m.isBookmarked) results for ‘@SearchWord’</span>
+        </h2>
+        <div class="search-result">
+            <SearchResultComponent SearchWord="@SearchWord" MovieCategory="Movie" TvCategory="TV Series" IsBookmarked="true" NotBookmarked="true" />
+        </div>
+    }
 }
 @code {
     private string? SearchWord { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        if (MediaState.Value.Medias is null)
+        {
+            Facade.LoadMedia();
+        }
+
+        base.OnInitialized();
+    }
 }
