@@ -7,7 +7,7 @@
     @if (!(MediaState.Value.Medias is null) && MediaState.Value.Medias.Any())
     {
         @foreach (var media in MediaState.Value.Medias
-       .Where(m => SearchWord != null && m.title != null && m.isTrending && m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant())))
+            .Where(m => SearchWord != null && m.title != null && m.isTrending && m.title.ToLowerInvariant().Contains(SearchWord.ToLowerInvariant())))
         {
 
             <div class="trending-card">
@@ -61,6 +61,9 @@
     }
 </div>
 
+<ToastComponent Active="@_activeCssClass" ToastMessage="@_toastMessage" Icon="@_icon"/>
+
+
 @code {
     [Parameter]
     public string? SearchWord { get; set; }
@@ -68,9 +71,37 @@
     [Parameter]
     public string Heading { get; set; }
 
-    private void AddToBookMarked(Media bookMedia)
+    private string? _toastMessage = "";
+    private string? _activeCssClass = "";
+    private string? _icon = "";
+
+    private async Task AddToBookMarked(Media bookMedia)
     {
         bookMedia.isBookmarked = !bookMedia.isBookmarked;
+
+        if (bookMedia.isBookmarked)
+        {
+            if (_activeCssClass == "added")
+            {
+                _activeCssClass = "";
+                await Task.Delay(1);
+            }
+            _activeCssClass = "added";
+            _icon = "fa-light fa-circle-plus";
+            _toastMessage = "Added to";
+
+        }
+        else
+        {
+            if (_activeCssClass == "removed")
+            {
+                _activeCssClass = "";
+                await Task.Delay(1);
+            }
+            _activeCssClass = "removed";
+            _icon = "fa-light fa-circle-minus";
+            _toastMessage = "Removed from";
+        }
     }
 
 }

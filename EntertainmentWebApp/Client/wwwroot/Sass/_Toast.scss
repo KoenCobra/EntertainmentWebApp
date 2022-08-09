@@ -1,0 +1,82 @@
+﻿@import "_Config.scss";
+
+.toast {
+    position: absolute;
+    top: 60px;
+    right: -150px;
+    z-index: 10;
+    background-color: $greyBlue;
+    padding: 1rem 1.5rem;
+    border-radius: 3px;
+    opacity: 0;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+    @media (max-width: 425px) {
+        font-size: 1rem;
+        padding: 0.8rem 1.3rem;
+    }
+
+    &.added {
+        animation: active 2s ease-out forwards;
+    }
+
+    &.removed {
+        animation: removed 2s ease-out forwards;
+        background-color: darken($greyBlue, 10%);
+    }
+}
+
+@keyframes active {
+    0% {
+        right: -50px;
+    }
+
+    25% {
+        opacity: 1;
+        right: 20px;
+    }
+
+    50% {
+        opacity: 1;
+        right: 20px;
+    }
+
+    80% {
+        opacity: 1;
+        right: 20px;
+    }
+
+    100% {
+        right: -300px;
+    }
+}
+
+@keyframes removed {
+    0% {
+        right: -50px;
+    }
+
+    25% {
+        opacity: 1;
+        right: 20px;
+    }
+
+    50% {
+        opacity: 1;
+        right: 20px;
+    }
+
+    80% {
+        opacity: 1;
+        right: 20px;
+    }
+
+    100% {
+        right: -300px;
+    }
+}

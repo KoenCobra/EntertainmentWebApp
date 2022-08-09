@@ -62,6 +62,9 @@
     }
 </div>
 
+<ToastComponent Active="@_activeCssClass" ToastMessage="@_toastMessage" Icon="@_icon"/>
+
+
 @code {
     [Parameter]
     public string? SearchWord { get; set; }
@@ -85,10 +88,38 @@
     public bool? IsNotTrending { get; set; } = false;
 
     [Parameter]
-    public string Heading { get; set; }
+    public string? Heading { get; set; }
 
-    private void AddToBookMarked(Media bookMedia)
+    private string? _toastMessage = "";
+    private string? _activeCssClass = "";
+    private string? _icon = "";
+
+    private async Task AddToBookMarked(Media bookMedia)
     {
         bookMedia.isBookmarked = !bookMedia.isBookmarked;
+
+        if (bookMedia.isBookmarked)
+        {
+            if (_activeCssClass == "added")
+            {
+                _activeCssClass = "";
+                await Task.Delay(1);
+            }
+            _activeCssClass = "added";
+            _icon = "fa-light fa-circle-plus";
+            _toastMessage = "Added to";
+
+        }
+        else
+        {
+            if (_activeCssClass == "removed")
+            {
+                _activeCssClass = "";
+                await Task.Delay(1);
+            }
+            _activeCssClass = "removed";
+            _icon = "fa-light fa-circle-minus";
+            _toastMessage = "Removed from";
+        }
     }
 }

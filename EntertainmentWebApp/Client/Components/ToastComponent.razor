@@ -1,0 +1,15 @@
+﻿<div class="toast @Active">
+    <i class="@Icon"></i>
+    <p>@ToastMessage bookmarked</p>
+</div>
+
+@code {
+    [Parameter]
+    public string? ToastMessage { get; set; }
+
+    [Parameter]
+    public string? Active { get; set; }
+
+    [Parameter]
+    public string? Icon { get; set; }
+}

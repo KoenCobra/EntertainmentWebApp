@@ -3,11 +3,11 @@
 
 <div class="media-card-section">
     @foreach (var media in MediaState.Value.Medias
-        .Where(m => SearchWord != null 
-                    && m.title != null 
-                    && m.title.ToLower().Contains(SearchWord.ToLower()) 
-                    && (m.category == MovieCategory || m.category == TvCategory) 
-                    && (m.isBookmarked == IsBookmarked || m.isBookmarked == NotBookmarked)))
+    .Where(m => SearchWord != null
+    && m.title != null
+    && m.title.ToLower().Contains(SearchWord.ToLower())
+    && (m.category == MovieCategory || m.category == TvCategory)
+    && (m.isBookmarked == IsBookmarked || m.isBookmarked == NotBookmarked)))
     {
         <div class="media-card">
             @if (media.isBookmarked)
@@ -25,12 +25,15 @@
             }
             <div class="media-img-container">
                 <img class="media-img" src="@media.thumbnail.regular.large" alt="media-img" loading="lazy" />
-                <div class="play-container">
-                    <div class="play">
-                        <img src="Assets/icon-play.svg" alt="" />
-                        <p>Play</p>
+                <a class="movie-link" href="https://www.youtube.com/watch?v=KAOdjqyG37A" target="_blank">
+                    <div class="play-container">
+                        <div class="play">
+                            <img src="Assets/icon-play.svg" alt="" />
+                            <p>Play</p>
+                        </div>
                     </div>
-                </div>
+                </a>
+
             </div>
             <div class="media-info">
                 <div class="media-year">
@@ -58,6 +61,9 @@
     }
 </div>
 
+<ToastComponent Active="@_activeCssClass" ToastMessage="@_toastMessage" Icon="@_icon" />
+
+
 @code {
     [Parameter]
     public string? SearchWord { get; set; }
@@ -74,8 +80,36 @@
     [Parameter]
     public bool? NotBookmarked { get; set; } = false;
 
-    private void AddToBookMarked(Media bookMedia)
+    private string? _toastMessage = "";
+    private string? _activeCssClass = "";
+    private string? _icon = "";
+
+    private async Task AddToBookMarked(Media bookMedia)
     {
         bookMedia.isBookmarked = !bookMedia.isBookmarked;
+
+        if (bookMedia.isBookmarked)
+        {
+            if (_activeCssClass == "added")
+            {
+                _activeCssClass = "";
+                await Task.Delay(1);
+            }
+            _activeCssClass = "added";
+            _icon = "fa-light fa-circle-plus";
+            _toastMessage = "Added to";
+
+        }
+        else
+        {
+            if (_activeCssClass == "removed")
+            {
+                _activeCssClass = "";
+                await Task.Delay(1);
+            }
+            _activeCssClass = "removed";
+            _icon = "fa-light fa-circle-minus";
+            _toastMessage = "Removed from";
+        }
     }
 }
